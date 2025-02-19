@@ -1,17 +1,12 @@
 <?php
 
 namespace Database\Seeders;
-use App\Models\State;
 
-
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\State;
 
 class StateSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run()
     {
         $states = [
@@ -19,9 +14,14 @@ class StateSeeder extends Seeder
             ['name' => 'Maharashtra'],
             ['name' => 'Rajasthan'],
             ['name' => 'Uttar Pradesh'],
-            ['name' => 'Karnataka']
+            ['name' => 'Karnataka'],
+            ['name' => 'Tamil Nadu'],
+            ['name' => 'West Bengal'],
+            ['name' => 'Madhya Pradesh'],
+            ['name' => 'Bihar'],
+            ['name' => 'Punjab']
         ];
 
         State::insert($states);
-}
+    }
 }

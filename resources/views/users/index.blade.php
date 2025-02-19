@@ -1,22 +1,20 @@
-
 @extends('layouts.app')
 
 @section('title', 'Users List')
 
 @section('content')
 <div class="container mt-4">
-    <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
             <h4 class="mb-0">Users List</h4>
             <div>
-                <a href="{{ route('users.create') }}" class="btn btn-success">
+                <a href="{{ route('users.create') }}" class="btn btn-light fw-bold">
                     <i class="bi bi-person-plus"></i> Add User
                 </a>
-                <a href="{{ route('users.export.csv') }}" class="btn btn-primary mb-3">
+                <a href="{{ route('users.export.csv') }}" class="btn btn-outline-light fw-bold">
                     <i class="bi bi-file-earmark-spreadsheet"></i> Export CSV
                 </a>
-
-                <a href="{{ route('users.export.excel') }}" class="btn btn-info mb-3">
+                <a href="{{ route('users.export.excel') }}" class="btn btn-outline-light fw-bold">
                     <i class="bi bi-file-earmark-excel"></i> Export Excel
                 </a>
             </div>
@@ -33,28 +31,28 @@
 
             {{-- Users Table --}}
             <div class="table-responsive">
-                <table class="table table-bordered table-hover">
-                    <thead class="table-dark">
+                <table class="table table-bordered align-middle shadow-sm">
+                    <thead class="bg-light text-dark">
                         <tr>
                             <th>ID</th>
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Email</th>
-                            <th>Contact Number</th>
+                            <th>Contact</th>
                             <th>Postcode</th>
                             <th>Gender</th>
                             <th>State</th>
                             <th>City</th>
                             <th>Roles</th>
                             <th>Hobbies</th>
-                            <th>Uploaded Files</th>
-                            <th>Actions</th>
-                            <th>Generate</th>
+                            <th>Files</th>
+                            <th class="text-center" style="width: 150px;">Actions</th>
+                            <th class="text-center" style="width: 120px;">Generate</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse($users as $user)
-                        <tr>
+                        <tr class="hover-effect">
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->first_name }}</td>
                             <td>{{ $user->last_name }}</td>
@@ -77,33 +75,35 @@
                             <td>
                                 @if($user->uploaded_files)
                                     @foreach(json_decode($user->uploaded_files, true) as $file)
-                                        <a href="{{ asset('storage/' . $file) }}" target="_blank">{{ basename($file) }}</a><br>
+                                        <a href="{{ asset('storage/' . $file) }}" target="_blank" class="text-decoration-none">{{ basename($file) }}</a><br>
                                     @endforeach
                                 @else
                                     N/A
                                 @endif
                             </td>
-                            <td>
-                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning btn-sm">
-                                    <i class="bi bi-pencil-square"></i> Edit
-                                </a>
-                                <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline delete-form">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">
-                                        <i class="bi bi-trash"></i> Delete
-                                    </button>
-                                </form>
+                            <td class="text-center">
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning btn-sm rounded-3">
+                                        <i class="bi bi-pencil-square"></i> Edit
+                                    </a>
+                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline delete-form">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm rounded-3">
+                                            <i class="bi bi-trash"></i> Delete
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
-                            <td>
-                                <a href="{{ route('users.registration', $user->id) }}" class="btn btn-danger btn-sm">
+                            <td class="text-center">
+                                <a href="{{ route('users.registration', $user->id) }}" class="btn btn-danger btn-sm rounded-3">
                                     <i class="bi bi-file-pdf"></i> PDF
                                 </a>
                             </td>
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="14" class="text-center">No users found.</td>
+                            <td colspan="14" class="text-center text-muted">No users found.</td>
                         </tr>
                         @endforelse
                     </tbody>
@@ -127,5 +127,13 @@
         });
     });
 </script>
+
+{{-- Custom CSS for Hover Effect --}}
+<style>
+    .hover-effect:hover {
+        background-color: #f8f9fa !important;
+        transition: 0.3s;
+    }
+</style>
 
 @endsection
