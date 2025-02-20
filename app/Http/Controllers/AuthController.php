@@ -135,6 +135,18 @@ class AuthController extends Controller
         // return redirect()->to(route('users.index'))->with('success', 'User Created Successfully');
 
     }
+    // public function login(Request $request)
+    // {
+    //     $credentials = $request->only('email', 'password');
+
+    //     if (Auth::attempt($credentials)) {
+    //         $user = Auth::user();
+    //         $token = $user->createToken('API Token')->accessToken;
+    //         return response()->json(['token' => $token], 200);
+    //     }
+
+    //     return response()->json(['error' => 'Unauthorized'], 401);
+    // }
 
     /**
      * Refresh Access Token

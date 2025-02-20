@@ -1,3 +1,4 @@
+
 <!--original code-->
 <!--
 <!DOCTYPE html>
@@ -76,6 +77,9 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('users.index') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('roles.index') }}">Role</a>
                     </li>
                     <!-- <li class="nav-item">
                         <a class="nav-link" href="{{ route('users.create') }}">Add User</a>
